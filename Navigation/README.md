@@ -48,4 +48,6 @@
   <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version1/Navigation/2.png">
 </p>
 
-
+<p align="center">
+  <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version1/Navigation/3.png">
+</p>
