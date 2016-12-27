@@ -44,3 +44,10 @@
   <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version2/Navigation/1.png">
 </p>
 
+<p align="center">
+  <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version2/Navigation/2.png">
+</p>
+
+<p align="center">
+  <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version2/Navigation/3.png">
+</p>

@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         drawerItem[1] = new DataModel(R.drawable.fixtures, "Fixtures");
         drawerItem[2] = new DataModel(R.drawable.table, "Table");
 
-        mDrawerList.setAdapter(new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem));
+        mDrawerList.setAdapter(new DrawerAdapter(this, R.layout.list_view_item_row, drawerItem));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         setupDrawerToggle();
@@ -86,24 +86,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
     }
 
     void setupToolbar(){
@@ -112,7 +97,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupDrawerToggle(){
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name, R.string.app_name);
-        mDrawerToggle.syncState();
+        toolbar.setNavigationIcon(R.drawable.connect);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
     }
 }

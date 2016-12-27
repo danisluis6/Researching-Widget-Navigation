@@ -15,13 +15,13 @@ import java.util.List;
  * Created by enclaveit on 27/12/2016.
  */
 
-public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel>{
+public class DrawerAdapter extends ArrayAdapter<DataModel>{
 
     private Context mContext;
     private int layoutResourceId;
     private DataModel data[] = null;
 
-    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
+    public DrawerAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
 
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
