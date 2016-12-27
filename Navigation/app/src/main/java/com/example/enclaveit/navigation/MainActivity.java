@@ -21,36 +21,38 @@ public class MainActivity extends AppCompatActivity {
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private Toolbar toolbar;
+    Toolbar toolbar;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
+    android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mTitle = mDrawerTitle = getTitle();
-        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView)findViewById(R.id.left_drawer);
+        mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         setupToolbar();
 
         DataModel[] drawerItem = new DataModel[3];
 
-        drawerItem[0] = new DataModel(R.drawable.demo, "Connect");
-        drawerItem[1] = new DataModel(R.drawable.demo, "Fixtures");
-        drawerItem[2] = new DataModel(R.drawable.demo, "Table");
+        drawerItem[0] = new DataModel(R.drawable.connect, "Connect");
+        drawerItem[1] = new DataModel(R.drawable.fixtures, "Fixtures");
+        drawerItem[2] = new DataModel(R.drawable.table, "Table");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        mDrawerList.setAdapter(new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem));
+        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
+        mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
+
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
         }
+
     }
 
     private void selectItem(int position) {
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 fragment = new TableFragment();
                 break;
+
             default:
                 break;
         }
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(mDrawerList);
 
         } else {
-            Log.d("MainActivity", "Error in creating fragment");
+            Log.e("MainActivity", "Error in creating fragment");
         }
     }
 
@@ -123,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     void setupDrawerToggle(){
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name, R.string.app_name);
+        //This is necessary to change the icon of the Drawer Toggle upon state change.
         mDrawerToggle.syncState();
     }
 }
