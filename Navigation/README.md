@@ -41,6 +41,11 @@
 
 ## Version1
 <p align="center">
-  <img src="https://github.com/danisluis6/Researching-Widget-GridView/blob/version1/GridView/version1_1.png">
+  <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version1/Navigation/1.png">
 </p>
+
+<p align="center">
+  <img src="https://github.com/danisluis6/Researching-Widget-Navigation/blob/version1/Navigation/2.png">
+</p>
+
 
