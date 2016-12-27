@@ -22,10 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Boolean active = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +98,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupDrawerToggle(){
-        toolbar.setNavigationIcon(R.drawable.connect);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        this.findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
+            public void onClick(View view) {
+                if(active){
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                    active = false;
+                }else{
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                    active = true;
+                }
             }
         });
     }
