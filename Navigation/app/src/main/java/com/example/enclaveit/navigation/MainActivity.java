@@ -1,14 +1,18 @@
 package com.example.enclaveit.navigation;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private View frame;
+    private float mLastTranslate = 0.0f;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        frame = this.findViewById(R.id.view);
 
         setupToolbar();
 
@@ -49,7 +56,31 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, null, 0, 0) {
+            @SuppressLint("NewApi")
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                // Detect if navigation drawer is opening
+                super.onDrawerSlide(drawerView, slideOffset);
+                float moveFactor = mDrawerList.getWidth() * slideOffset;
+
+                if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
+                    frame.setTranslationX(moveFactor);
+                } else {
+                    TranslateAnimation anim = new TranslateAnimation(mLastTranslate, moveFactor, 0.0f, 0.0f);
+                    anim.setDuration(0);
+                    anim.setFillAfter(true);
+                    frame.startAnimation(anim);
+                    mLastTranslate = moveFactor;
+                }
+            }
+        };
+
+        //noinspection deprecation
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+
+        // mDrawerLayout.setDrawerListener(mDrawerToggle);
         setupDrawerToggle();
 
 
